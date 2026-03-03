@@ -1,100 +1,112 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  Linkedin,
+  Mail,
+  FileText,
+  ArrowRight,
+  Briefcase,
+  FolderGit2,
+  Sparkles,
+} from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="max-w-4xl mx-auto p-10 font-sans">
+    <main className="min-h-[calc(100vh-56px)] bg-gradient-to-b from-slate-50 to-white">
+      <div className="mx-auto max-w-5xl px-6 py-14">
+        {/* Hero */}
+        <section className="rounded-3xl border bg-white/80 p-8 shadow-sm backdrop-blur">
+          <div className="flex items-center gap-2 text-sm text-slate-600">
+            <Sparkles size={16} className="text-indigo-600" />
+            <span>Machine Learning • Data Science • Systems</span>
+          </div>
 
-      <h1 className="text-4xl font-bold mb-2">Wyndham Woo</h1>
-      <p className="text-gray-600 mb-6">
-        Machine Learning Engineer • Data Science @ UC Berkeley
-      </p>
+          <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
+            Wyndham Woo
+          </h1>
 
-      <div className="mb-10">
-        <a className="mr-4 text-blue-600" href="https://linkedin.com/in/wyndham-woo">
-          LinkedIn
-        </a>
+          <p className="mt-4 max-w-2xl leading-relaxed text-slate-600">
+            I build ML systems end-to-end — from data pipelines to deployment —
+            with a focus on efficient training (quantization, distributed
+            training) and real-world products.
+          </p>
 
-        <a className="mr-4 text-blue-600" href="mailto:wyndham_woo@berkeley.edu">
-          Email
-        </a>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              className="inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+              href="mailto:wyndham_woo@berkeley.edu"
+            >
+              <Mail size={16} /> Email
+            </a>
+
+            <a
+              className="inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+              href="https://linkedin.com/in/wyndham-woo"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Linkedin size={16} /> LinkedIn
+            </a>
+
+            <a
+              className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+              href="/resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FileText size={16} /> Resume
+            </a>
+          </div>
+        </section>
+
+        {/* Cards */}
+        <section className="mt-10 grid gap-4 sm:grid-cols-2">
+          <Card
+            icon={<Briefcase size={18} className="text-indigo-600" />}
+            title="Experience"
+            desc="AWS (Trainium), Dattel, Finno — ML engineering + deployment."
+            href="/experience"
+          />
+          <Card
+            icon={<FolderGit2 size={18} className="text-indigo-600" />}
+            title="Projects"
+            desc="Fake news prediction, NLP pipelines, FastAPI deployments."
+            href="/projects"
+          />
+        </section>
+
+        {/* Footer line */}
+        <p className="mt-10 text-sm text-slate-500">
+          Built with Next.js + Tailwind • Deployed on Vercel
+        </p>
       </div>
-
-      <section className="mb-10">
-        <h2 className="text-2xl font-semibold mb-3">Education</h2>
-
-        <p>
-          <strong>University of California, Berkeley</strong>
-        </p>
-
-        <p>B.A. Data Science</p>
-        <p className="text-gray-600">GPA: 3.75</p>
-
-      </section>
-
-
-      <section className="mb-10">
-        <h2 className="text-2xl font-semibold mb-3">Experience</h2>
-
-        <div className="mb-6">
-          <h3 className="font-bold">AWS (Annapurna Labs) — ML Engineer Intern</h3>
-
-          <ul className="list-disc ml-6">
-            <li>Implemented distributed eager-mode training for quantized transformers on AWS Trainium</li>
-            <li>Developed fused quantized matmul kernels using NKI</li>
-            <li>Integrated distributed sharding with PyTorch distributed APIs</li>
-          </ul>
-        </div>
-
-
-        <div className="mb-6">
-          <h3 className="font-bold">Dattel Consumer Intelligence — Data Scientist</h3>
-
-          <ul className="list-disc ml-6">
-            <li>Built LLM-driven market intelligence pipeline using OpenAI API</li>
-            <li>Improved SQL generation accuracy and reduced hallucinations</li>
-            <li>Developed churn prediction models with XGBoost and LightGBM</li>
-          </ul>
-        </div>
-
-
-        <div>
-          <h3 className="font-bold">Finno Insurance — ML Engineer Intern</h3>
-
-          <ul className="list-disc ml-6">
-            <li>Developed lead conversion prediction models</li>
-            <li>Built feature engineering pipelines for CRM data</li>
-          </ul>
-        </div>
-
-      </section>
-
-
-      <section className="mb-10">
-
-        <h2 className="text-2xl font-semibold mb-3">Research</h2>
-
-        <p><strong>Predicting Fake News</strong></p>
-
-        <ul className="list-disc ml-6">
-          <li>Built NLP pipeline with TF-IDF + Logistic Regression</li>
-          <li>Fine-tuned DistilBERT for classification</li>
-          <li>Deployed inference endpoint with FastAPI</li>
-        </ul>
-
-      </section>
-
-
-      <section>
-
-        <h2 className="text-2xl font-semibold mb-3">Technical Skills</h2>
-
-        <p>
-          Python • Java • SQL • AWS • PyTorch • HuggingFace • FastAPI • Docker
-        </p>
-
-      </section>
-
-
     </main>
-  )
+  );
+}
+
+function Card({
+  icon,
+  title,
+  desc,
+  href,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+  href: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group rounded-3xl border bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-md"
+    >
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          {icon}
+          <h3 className="font-semibold">{title}</h3>
+        </div>
+        <ArrowRight size={18} className="text-slate-400 group-hover:text-indigo-600" />
+      </div>
+      <p className="mt-2 text-sm text-slate-600">{desc}</p>
+    </Link>
+  );
 }
